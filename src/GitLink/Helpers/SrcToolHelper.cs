@@ -42,7 +42,10 @@ namespace GitLink
 
                             if (repositoryDirectory != null)
                             {
-                                sources.Add(sourceFile);
+                                if (!sources.Contains(sourceFile))
+                                {
+                                    sources.Add(sourceFile);
+                                }
                             }
                         }
                     }
