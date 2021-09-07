@@ -18,7 +18,8 @@ namespace GitLink
         internal static List<string> GetSourceFiles(string srcToolFilePath, string projectPdbFile)
         {
             Argument.IsNotNullOrWhitespace(() => projectPdbFile);
-            List<string> sources = new List<string>();
+
+            HashSet<string> sources = new HashSet<string>();
 
             var processStartInfo = new ProcessStartInfo(srcToolFilePath)
             {
@@ -42,10 +43,7 @@ namespace GitLink
 
                             if (repositoryDirectory != null)
                             {
-                                if (!sources.Contains(sourceFile))
-                                {
-                                    sources.Add(sourceFile);
-                                }
+                                sources.Add(sourceFile);
                             }
                         }
                     }
@@ -64,7 +62,8 @@ namespace GitLink
                 }
             }
 
-            return sources;
+            List<string> sourcesList = new List<string>(sources);
+            return sourcesList;
         }
     }
 }
